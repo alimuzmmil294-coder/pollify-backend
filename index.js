@@ -13,7 +13,10 @@ const configuredOrigins = (process.env.CORS_ORIGINS || "")
   .split(",")
   .map((origin) => origin.trim())
   .filter(Boolean);
-const developmentOrigins = ["http://localhost:5173", "http://127.0.0.1:5173"];
+const developmentOrigins = [
+  "https://polify-fullstack-project-ao42.vercel.app",
+  "http://127.0.0.1:5173",
+];
 const allowedOrigins = new Set(
   isProduction
     ? configuredOrigins
@@ -47,7 +50,8 @@ app.use((error, _req, res, _next) => {
     const messages = {
       LIMIT_FILE_SIZE: "Each image must be 5 MB or smaller.",
       LIMIT_FILE_COUNT: "Too many image files were uploaded.",
-      LIMIT_UNEXPECTED_FILE: "Unexpected upload field. Use the documented image field.",
+      LIMIT_UNEXPECTED_FILE:
+        "Unexpected upload field. Use the documented image field.",
     };
     return res.status(400).json({
       success: false,
